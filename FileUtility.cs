@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace Aug8thExamples
@@ -13,11 +14,22 @@ namespace Aug8thExamples
             }
         }
 
-        public static void WriteToFile(string filename)
+        public static void ModifyFile(string filename, bool canAppend,  List<string>input=null)
         {
-            using (StreamWriter writer = new StreamWriter(filename))
+            using (StreamWriter writer = new StreamWriter(filename , canAppend))
             {
-                writer.WriteLine("This is a new string");
+                if (input == null)
+                {
+                    writer.WriteLine("This is a new string");
+                }
+                else
+                {
+                    foreach (var v in input)
+                    {
+                        writer.WriteLine(v);
+                    }
+                }
+               
             }
         }
 
@@ -32,5 +44,11 @@ namespace Aug8thExamples
                 }
             }
         }
+
+        public static void Delete(string fileName)
+        {
+            File.Delete(fileName);
+        }
+            
     }
 }
